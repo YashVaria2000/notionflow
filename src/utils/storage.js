@@ -28,10 +28,10 @@ export const loadFromStorage = () => {
         const saved = localStorage.getItem(STORAGE_KEY);
         return saved
             ? JSON.parse(saved)
-            : { notes: [], tasks: [], theme: "dark" };
+            : { notes: [], tasks: [], theme: "light" };
     } catch (e) {
         console.error("Failed to load from localStorage:", e);
-        return { notes: [], tasks: [], theme: "dark" };
+        return { notes: [], tasks: [], theme: "light" };
     }
 };
 
