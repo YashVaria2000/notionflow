@@ -4,6 +4,7 @@ import Topbar from "./Topbar";
 import NotesList from "../notes/NotesList";
 import NoteEditor from "../notes/NoteEditor";
 import KanbanBoard from "../kanban/KanbanBoard";
+import HomeDashboard from "../../pages/HomeDashboard";
 
 const Layout = () => {
     const { currentView } = useApp();
@@ -17,6 +18,7 @@ const Layout = () => {
             case "tasks":
                 return <KanbanBoard />;
             case "home":
+                return <HomeDashboard />;
             default:
                 return (
                     <div className="text-center py-20">

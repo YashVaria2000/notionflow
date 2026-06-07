@@ -1,10 +1,13 @@
 import { useApp } from "../../context/AppContext";
+import ResetModal from "../common/ResetModal";
+import { Trash2 } from "lucide-react";
 import { Home, FileText, CheckSquare, Plus, Menu } from "lucide-react";
 import { useState } from "react";
 
 const Sidebar = () => {
-    const { setCurrentView, addNote } = useApp();
+    const { setCurrentView, addNote, resetAllData } = useApp();
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [showResetModal, setShowResetModal] = useState(false);
 
     const menuItems = [
         { label: "Home", icon: Home, view: "home" },
@@ -66,8 +69,22 @@ const Sidebar = () => {
 
             {/* Footer */}
             <div className="p-4 text-xs text-gray-500 dark:text-zinc-500 border-t border-gray-200 dark:border-zinc-800 mt-auto">
-                {!isCollapsed && "Portfolio Project"}
+                {/* <div className="p-4 border-t border-gray-200 dark:border-zinc-800 mt-auto"></div> */}
+                <button
+                    onClick={() => setShowResetModal(true)}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-2xl transition-colors"
+                >
+                    <Trash2 size={20} />
+                    {!isCollapsed && "Reset All Data"}
+                </button>
+                {/* {!isCollapsed && "Portfolio Project"} */}
             </div>
+
+            <ResetModal
+                isOpen={showResetModal}
+                onClose={() => setShowResetModal(false)}
+                onConfirm={resetAllData}
+            />
         </div>
     );
 };

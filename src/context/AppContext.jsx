@@ -8,7 +8,7 @@ export const useApp = () => useContext(AppContext);
 export const AppProvider = ({ children }) => {
     const [notes, setNotes] = useState([]);
     const [tasks, setTasks] = useState([]);
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState("light");
     const [currentView, setCurrentView] = useState("home");
     const [currentNoteId, setCurrentNoteId] = useState(null);
 
@@ -111,6 +111,23 @@ export const AppProvider = ({ children }) => {
         setTasks((prev) => prev.filter((task) => task.id !== id));
     };
 
+    // ==================== RESET DATA ====================
+
+    // Reset all data
+    const resetAllData = () => {
+        setNotes([]);
+        setTasks([]);
+        setTheme("light");
+        setCurrentView("home");
+        setCurrentNoteId(null);
+
+        // Clear localStorage
+        localStorage.removeItem("notionflow_data");
+
+        // Force light theme
+        document.documentElement.classList.remove("dark");
+    };
+
     // ==================== VALUE OBJECT ====================
 
     const value = {
@@ -128,6 +145,7 @@ export const AppProvider = ({ children }) => {
         addTask,
         updateTaskStatus,
         deleteTask,
+        resetAllData,
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

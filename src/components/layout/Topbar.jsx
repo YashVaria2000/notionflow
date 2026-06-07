@@ -21,7 +21,7 @@ const Topbar = () => {
 
             <div className="flex items-center gap-4">
                 <button
-                    // onClick={toggleTheme}
+                    onClick={toggleTheme}
                     className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
                 >
                     {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}

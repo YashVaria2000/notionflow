@@ -1,10 +1,11 @@
 import { useApp } from "../../context/AppContext";
-import { Plus, Calendar, Search } from "lucide-react";
-import { format } from "date-fns";
 import { useState, useEffect } from "react";
+import { Plus, Calendar, Trash2, Search } from "lucide-react";
+import { format } from "date-fns";
 
 const NotesList = () => {
-    const { notes, setCurrentView, setCurrentNoteId, addNote } = useApp();
+    const { notes, setCurrentView, setCurrentNoteId, addNote, deleteNote } =
+        useApp();
 
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredNotes, setFilteredNotes] = useState(notes);
@@ -18,9 +19,8 @@ const NotesList = () => {
                 const term = searchTerm.toLowerCase();
                 const filtered = notes.filter(
                     (note) =>
-                        note.title.toLowerCase().includes(term) ||
-                        (note.content &&
-                            note.content.toLowerCase().includes(term)),
+                        note.title?.toLowerCase().includes(term) ||
+                        note.content?.toLowerCase().includes(term),
                 );
                 setFilteredNotes(filtered);
             }
@@ -67,23 +67,27 @@ const NotesList = () => {
                     {filteredNotes.map((note) => (
                         <div
                             key={note.id}
-                            onClick={() => {
-                                setCurrentNoteId(note.id);
-                                setCurrentView("editor");
-                            }}
-                            className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-3xl p-6 hover:border-indigo-500 hover:shadow-xl cursor-pointer transition-all group"
+                            className="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-3xl p-6 hover:border-indigo-500 hover:shadow-xl transition-all relative"
                         >
-                            <h3 className="font-semibold text-xl mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
-                                {note.title || "Untitled Note"}
-                            </h3>
+                            <div
+                                onClick={() => {
+                                    setCurrentNoteId(note.id);
+                                    setCurrentView("editor");
+                                }}
+                                className="cursor-pointer"
+                            >
+                                <h3 className="font-semibold text-xl mb-3 line-clamp-2 pr-8">
+                                    {note.title || "Untitled Note"}
+                                </h3>
 
-                            <p className="text-gray-600 dark:text-zinc-400 line-clamp-4 text-[15px] mb-6">
-                                {note.content
-                                    ? note.content
-                                          .replace(/<[^>]+>/g, " ")
-                                          .trim()
-                                    : "No content yet..."}
-                            </p>
+                                <p className="text-gray-600 dark:text-zinc-400 line-clamp-4 text-[15px] mb-6">
+                                    {note.content
+                                        ? note.content
+                                              .replace(/<[^>]+>/g, " ")
+                                              .trim()
+                                        : "No content yet..."}
+                                </p>
+                            </div>
 
                             <div className="flex items-center justify-between text-xs text-gray-400">
                                 <div className="flex items-center gap-1">
@@ -93,10 +97,20 @@ const NotesList = () => {
                                         "MMM dd, yyyy",
                                     )}
                                 </div>
-                                <span className="text-[10px] opacity-60">
-                                    Click to open
-                                </span>
                             </div>
+
+                            {/* Delete Button */}
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (window.confirm("Delete this note?")) {
+                                        deleteNote(note.id);
+                                    }
+                                }}
+                                className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 p-2 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-xl transition-all"
+                            >
+                                <Trash2 size={18} />
+                            </button>
                         </div>
                     ))}
                 </div>
