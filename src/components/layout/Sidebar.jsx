@@ -5,7 +5,7 @@ import { Home, FileText, CheckSquare, Plus, Menu } from "lucide-react";
 import { useState } from "react";
 
 const Sidebar = () => {
-    const { setCurrentView, addNote, resetAllData } = useApp();
+    const { setCurrentView, currentView, addNote, resetAllData } = useApp();
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [showResetModal, setShowResetModal] = useState(false);
 
@@ -21,22 +21,19 @@ const Sidebar = () => {
         >
             {/* Header */}
             <div className="p-4 flex items-center justify-between border-b border-gray-200 dark:border-zinc-800">
-                <div className="flex items-center gap-3">
-                    {!isCollapsed && (
-                        <>
-                            <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
-                                N
-                            </div>
-                            <span className="font-semibold text-2xl tracking-tight">
-                                NotionFlow
-                            </span>
-                        </>
-                    )}
-                </div>
-
+                {!isCollapsed && (
+                    <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                            N
+                        </div>
+                        <span className="font-semibold text-2xl tracking-tight">
+                            NotionFlow
+                        </span>
+                    </div>
+                )}
                 <button
                     onClick={() => setIsCollapsed(!isCollapsed)}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                    className="p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
                 >
                     <Menu size={22} />
                 </button>
@@ -54,12 +51,16 @@ const Sidebar = () => {
             </div>
 
             {/* Navigation */}
-            <nav className="px-3 flex-1 space-y-1">
+            <nav className="p-4 flex-1 space-y-1">
                 {menuItems.map((item) => (
                     <button
                         key={item.view}
                         onClick={() => setCurrentView(item.view)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all ${isCollapsed ? "justify-center" : ""}`}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm rounded-2xl transition-all ${
+                            currentView === item.view
+                                ? "bg-indigo-100 dark:bg-indigo-900/40  text-indigo-700 dark:text-indigo-300 font-medium"
+                                : "hover:bg-gray-100 dark:hover:bg-zinc-800"
+                        } ${isCollapsed ? "justify-center" : ""}`}
                     >
                         <item.icon size={22} />
                         {!isCollapsed && <span>{item.label}</span>}
