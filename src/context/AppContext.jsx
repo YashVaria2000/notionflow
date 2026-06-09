@@ -89,22 +89,26 @@ export const AppProvider = ({ children }) => {
 
     // ==================== TASK FUNCTIONS ====================
 
-    const addTask = (title) => {
-        if (!title?.trim()) return;
-
+    // Add Task (now accepts full object)
+    const addTask = (taskData) => {
         const newTask = {
             id: "task_" + Date.now(),
-            title: title.trim(),
+            title: taskData.title,
+            description: taskData.description || "",
+            priority: taskData.priority || "low",
             status: "todo",
             createdAt: new Date().toISOString(),
         };
         setTasks((prev) => [...prev, newTask]);
     };
 
+    // Update Task (for edit + status change)
+    const updateTask = (id, updates) => {
+        setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, ...updates } : task)));
+    };
+
     const updateTaskStatus = (id, status) => {
-        setTasks((prev) =>
-            prev.map((task) => (task.id === id ? { ...task, status } : task)),
-        );
+        setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, status } : task)));
     };
 
     const deleteTask = (id) => {
@@ -143,6 +147,7 @@ export const AppProvider = ({ children }) => {
         updateNote,
         deleteNote,
         addTask,
+        updateTask,
         updateTaskStatus,
         deleteTask,
         resetAllData,
