@@ -3,8 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import { ArrowLeft, Trash2 } from "lucide-react";
 
 const NoteEditor = () => {
-    const { currentNoteId, notes, updateNote, deleteNote, setCurrentView } =
-        useApp();
+    const { currentNoteId, notes, updateNote, deleteNote, setCurrentView } = useApp();
 
     const currentNote = notes.find((note) => note.id === currentNoteId);
 
@@ -32,11 +31,7 @@ const NoteEditor = () => {
     }, [title, content]);
 
     if (!currentNote) {
-        return (
-            <div className="text-center py-20 text-gray-500">
-                Note not found
-            </div>
-        );
+        return <div className="text-center py-20 text-gray-500">Note not found</div>;
     }
 
     return (
@@ -45,7 +40,7 @@ const NoteEditor = () => {
             <div className="flex items-center gap-4 mb-8">
                 <button
                     onClick={() => setCurrentView("notes")}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl"
+                    className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-xl"
                 >
                     <ArrowLeft size={24} />
                 </button>
@@ -54,7 +49,7 @@ const NoteEditor = () => {
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="flex-1 bg-transparent text-4xl font-semibold focus:outline-none placeholder:text-gray-400"
+                    className="flex-1 bg-transparent text-4xl text-zinc-900 dark:text-zinc-100 font-semibold focus:outline-none placeholder:text-gray-400"
                     placeholder="Untitled Note"
                 />
 
@@ -74,13 +69,11 @@ const NoteEditor = () => {
             <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="w-full h-[70vh] bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-3xl p-8 text-lg focus:outline-none resize-none leading-relaxed"
+                className="w-full h-[70vh] bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border border-gray-200 dark:border-zinc-700 rounded-3xl p-8 text-lg focus:outline-none resize-none leading-relaxed"
                 placeholder="Start writing here..."
             />
 
-            <div className="text-xs text-gray-400 mt-4 text-center">
-                Last updated: {new Date(currentNote.updatedAt).toLocaleString()}
-            </div>
+            <div className="text-xs text-gray-400 mt-4 text-center">Last updated: {new Date(currentNote.updatedAt).toLocaleString()}</div>
         </div>
     );
 };

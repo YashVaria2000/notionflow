@@ -61,7 +61,7 @@ const Topbar = () => {
                             setShowResults(true);
                         }}
                         onFocus={() => setShowResults(true)}
-                        className="w-full bg-gray-100 dark:bg-zinc-800 pl-10 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full bg-gray-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 pl-10 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
 
                     {/* Search Dropdown */}
@@ -76,7 +76,7 @@ const Topbar = () => {
                                     >
                                         {item.type === "note" ? <div className="text-blue-600">📝</div> : <div className="text-amber-600">✓</div>}
                                         <div className="flex-1 min-w-0">
-                                            <p className="font-medium truncate">{item.title}</p>
+                                            <p className="font-medium text-zinc-900 dark:text-zinc-100 truncate">{item.title}</p>
                                             {item.description && (
                                                 <p className="text-xs text-gray-500 dark:text-zinc-400 truncate">{item.description}</p>
                                             )}
@@ -93,7 +93,10 @@ const Topbar = () => {
             </div>
 
             <div className="flex items-center gap-4">
-                <button onClick={toggleTheme} className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
+                <button
+                    onClick={toggleTheme}
+                    className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-lg transition-colors"
+                >
                     {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
                 <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full"></div>

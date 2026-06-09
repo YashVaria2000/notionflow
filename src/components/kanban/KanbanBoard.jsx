@@ -48,7 +48,7 @@ const KanbanBoard = () => {
     return (
         <div>
             <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-semibold">Tasks</h2>
+                <h2 className="text-3xl text-zinc-900 dark:text-zinc-100 font-semibold">Tasks</h2>
                 <button
                     onClick={openNewTask}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl flex items-center gap-2 font-medium"
@@ -69,7 +69,7 @@ const KanbanBoard = () => {
                             onDrop={(e) => handleDrop(e, column.id)}
                             onDragOver={handleDragOver}
                         >
-                            <h3 className="font-semibold text-lg mb-6 flex items-center gap-2">
+                            <h3 className="font-semibold text-lg text-zinc-900 dark:text-zinc-100 mb-6 flex items-center gap-2">
                                 {column.title}
                                 <span className="text-sm font-normal text-gray-500">({columnTasks.length})</span>
                             </h3>
@@ -84,7 +84,7 @@ const KanbanBoard = () => {
                                     >
                                         <div className="flex justify-between items-start">
                                             <div className="flex-1">
-                                                <p className="font-medium">{task.title}</p>
+                                                <p className="font-medium text-zinc-900 dark:text-zinc-100">{task.title}</p>
                                                 {task.description && (
                                                     <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1 line-clamp-2">{task.description}</p>
                                                 )}

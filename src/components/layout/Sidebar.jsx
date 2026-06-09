@@ -26,14 +26,12 @@ const Sidebar = () => {
                         <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
                             N
                         </div>
-                        <span className="font-semibold text-2xl tracking-tight">
-                            NotionFlow
-                        </span>
+                        <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-2xl tracking-tight">NotionFlow</span>
                     </div>
                 )}
                 <button
                     onClick={() => setIsCollapsed(!isCollapsed)}
-                    className="p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                    className="p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-lg transition-colors"
                 >
                     <Menu size={22} />
                 </button>
@@ -56,7 +54,7 @@ const Sidebar = () => {
                     <button
                         key={item.view}
                         onClick={() => setCurrentView(item.view)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm rounded-2xl transition-all ${
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-zinc-900 dark:text-zinc-100 text-sm rounded-2xl transition-all ${
                             currentView === item.view
                                 ? "bg-indigo-100 dark:bg-indigo-900/40  text-indigo-700 dark:text-indigo-300 font-medium"
                                 : "hover:bg-gray-100 dark:hover:bg-zinc-800"
@@ -81,11 +79,7 @@ const Sidebar = () => {
                 {/* {!isCollapsed && "Portfolio Project"} */}
             </div>
 
-            <ResetModal
-                isOpen={showResetModal}
-                onClose={() => setShowResetModal(false)}
-                onConfirm={resetAllData}
-            />
+            <ResetModal isOpen={showResetModal} onClose={() => setShowResetModal(false)} onConfirm={resetAllData} />
         </div>
     );
 };

@@ -13,8 +13,8 @@ const HomeDashboard = () => {
         <div className="max-w-6xl mx-auto">
             {/* Greeting */}
             <div className="mb-10">
-                <h1 className="text-5xl font-bold mb-2">Good morning, Yash 👋</h1>
-                <p className="text-xl text-gray-500 dark:text-zinc-400">Here's what's happening in your workspace today</p>
+                {/* <h1 className="text-5xl text-zinc-900 dark:text-zinc-100 font-bold mb-2">Good morning</h1> */}
+                <p className="text-center text-xl text-gray-500 dark:text-zinc-400">Here's what's happening in your workspace today</p>
             </div>
 
             {/* Stats Cards */}
@@ -23,7 +23,7 @@ const HomeDashboard = () => {
                     <div className="flex items-center gap-4">
                         <FileText className="text-indigo-600" size={36} />
                         <div>
-                            <p className="text-5xl font-semibold">{notes.length}</p>
+                            <p className="text-5xl text-zinc-900 dark:text-zinc-100 font-semibold">{notes.length}</p>
                             <p className="text-gray-500 dark:text-zinc-400">Total Notes</p>
                         </div>
                     </div>
@@ -33,7 +33,7 @@ const HomeDashboard = () => {
                     <div className="flex items-center gap-4">
                         <CheckSquare className="text-indigo-600" size={36} />
                         <div>
-                            <p className="text-5xl font-semibold">{pendingTasks.length}</p>
+                            <p className="text-5xl text-zinc-900 dark:text-zinc-100 font-semibold">{pendingTasks.length}</p>
                             <p className="text-gray-500 dark:text-zinc-400">Pending Tasks</p>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ const HomeDashboard = () => {
                     <div className="flex items-center gap-4">
                         <Clock className="text-amber-600" size={36} />
                         <div>
-                            <p className="text-5xl font-semibold">{highPriorityTasks.length}</p>
+                            <p className="text-5xl text-zinc-900 dark:text-zinc-100 font-semibold">{highPriorityTasks.length}</p>
                             <p className="text-gray-500 dark:text-zinc-400">High Priority</p>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ const HomeDashboard = () => {
                 {/* Recent Notes */}
                 <div>
                     <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                        <h2 className="text-2xl text-zinc-900 dark:text-zinc-100 font-semibold flex items-center gap-2">
                             <FileText size={24} /> Recent Notes
                         </h2>
                         <button
@@ -84,7 +84,9 @@ const HomeDashboard = () => {
                                     }}
                                     className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-3xl p-6 hover:border-indigo-500 cursor-pointer transition-all"
                                 >
-                                    <h3 className="font-semibold text-lg mb-2 line-clamp-1">{note.title || "Untitled Note"}</h3>
+                                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-lg mb-2 line-clamp-1">
+                                        {note.title || "Untitled Note"}
+                                    </h3>
                                     <p className="text-gray-600 dark:text-zinc-400 line-clamp-2 text-sm">
                                         {note.content ? note.content.replace(/<[^>]+>/g, "").trim() : "No content yet..."}
                                     </p>
@@ -102,7 +104,7 @@ const HomeDashboard = () => {
                 {/* Quick Tasks */}
                 <div>
                     <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-2xl font-semibold flex items-center gap-2">
+                        <h2 className="text-2xl text-zinc-900 dark:text-zinc-100 font-semibold flex items-center gap-2">
                             <CheckSquare size={24} /> Pending Tasks
                         </h2>
                         <button
@@ -127,7 +129,7 @@ const HomeDashboard = () => {
                                         }`}
                                     />
                                     <div className="flex-1">
-                                        <p className="font-medium">{task.title}</p>
+                                        <p className="font-medium text-zinc-900 dark:text-zinc-100">{task.title}</p>
                                         {task.description && (
                                             <p className="text-sm text-gray-500 dark:text-zinc-400 line-clamp-1">{task.description}</p>
                                         )}
